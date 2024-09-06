@@ -10,13 +10,16 @@ return new class extends Migration {
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->string('title'); // 必須フィールド
+        Schema::create('posts', function (Blueprint $table) {
+            $table->id();
+             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+             $table->string('title');
+             $table->text('content');
+            $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
